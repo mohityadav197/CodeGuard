@@ -2,10 +2,21 @@ from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from backend.config import DATABASE_CONNECT_ARGS, DATABASE_URL
+from backend.config import settings
 from backend.database.models import Base
 
-engine = create_async_engine(DATABASE_URL, connect_args=DATABASE_CONNECT_ARGS)
+# pool_pre_ping + pool_recycle guard against Neon silently closing idle
+# serverless connections out from under SQLAlchemy's pool (pool_recycle is
+# set safely below Neon's ~5-minute idle timeout).
+engine = create_async_engine(
+    settings.DATABASE_URL,
+    connect_args=settings.DATABASE_CONNECT_ARGS,
+    pool_pre_ping=True,
+    pool_recycle=280,
+    pool_size=5,
+    max_overflow=10,
+    echo=False,
+)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
 
