@@ -11,10 +11,14 @@ import os
 import sys
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.sessions import SessionMiddleware
 
 from backend import config
 from backend.api.routes import router as api_router
 from backend.api.webhook import router as webhook_router
+from backend.auth.routes import router as auth_router
+from backend.config import settings
 from backend.core.diff_parser import annotate_for_prompt, commentable_lines, parse_patch
 from backend.core.github_client import GitHubClient
 from backend.core.graph import build_graph
@@ -25,8 +29,19 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(messag
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="CodeGuard", description="AI Code Review Agent")
+
+app.add_middleware(SessionMiddleware, secret_key=settings.JWT_SECRET)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[settings.FRONTEND_URL],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(api_router)
 app.include_router(webhook_router)
+app.include_router(auth_router)
 
 
 @app.on_event("startup")

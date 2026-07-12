@@ -18,6 +18,15 @@ GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 GITHUB_WEBHOOK_SECRET = os.environ.get("GITHUB_WEBHOOK_SECRET", "")
 
+# GitHub OAuth app (user login), distinct from GITHUB_TOKEN above (the
+# repo-scoped PAT used by the CLI/Action review pipeline).
+GITHUB_CLIENT_ID = os.environ.get("GITHUB_CLIENT_ID", "")
+GITHUB_CLIENT_SECRET = os.environ.get("GITHUB_CLIENT_SECRET", "")
+JWT_SECRET = os.environ.get("JWT_SECRET", "")
+
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:5173")
+SERVER_URL = os.environ.get("SERVER_URL", "http://localhost:8000")
+
 # Model used for all three specialist agents. Groq's Llama 3.3 70B is a good
 # balance of quality and speed/cost for structured-output code review.
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
@@ -69,6 +78,11 @@ class Settings:
     RAW_DATABASE_URL = RAW_DATABASE_URL
     DATABASE_URL = DATABASE_URL
     DATABASE_CONNECT_ARGS = DATABASE_CONNECT_ARGS
+    GITHUB_CLIENT_ID = GITHUB_CLIENT_ID
+    GITHUB_CLIENT_SECRET = GITHUB_CLIENT_SECRET
+    JWT_SECRET = JWT_SECRET
+    FRONTEND_URL = FRONTEND_URL
+    SERVER_URL = SERVER_URL
 
 
 settings = Settings()
