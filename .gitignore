@@ -7,4 +7,4 @@ venv/
 *.egg-info/
 frontend/node_modules/
 frontend/dist/
-codeguard.db
+alembic/versions/__pycache__/

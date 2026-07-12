@@ -31,7 +31,7 @@ app.include_router(webhook_router)
 
 @app.on_event("startup")
 async def startup():
-    init_db()
+    await init_db()
 
 
 def _build_diff_files(pr_files: list[dict]) -> list[DiffFile]:
