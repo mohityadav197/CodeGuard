@@ -38,3 +38,4 @@ class ReviewState(TypedDict, total=False):
     quality_findings: list[Finding]
     summary: str
     comments: list[dict]
+    final_findings: list[dict]

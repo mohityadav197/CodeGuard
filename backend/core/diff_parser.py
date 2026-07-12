@@ -12,6 +12,8 @@ import re
 from dataclasses import dataclass, field
 from typing import Optional
 
+from .state import DiffFile
+
 _HUNK_HEADER_RE = re.compile(r"^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@")
 
 
@@ -92,3 +94,23 @@ def annotate_for_prompt(filename: str, hunks: list[Hunk]) -> str:
 def commentable_lines(hunks: list[Hunk]) -> set[int]:
     """New-file line numbers that GitHub will accept for an inline review comment."""
     return {dl.line_no for hunk in hunks for dl in hunk.lines if dl.line_no is not None}
+
+
+def build_diff_files(pr_files: list[dict]) -> list[DiffFile]:
+    """Turn GitHub's per-file `patch` payloads into annotated DiffFiles ready
+    for the review pipeline. Shared by both the CLI/Action entrypoint and the
+    webhook handler."""
+    files: list[DiffFile] = []
+    for pf in pr_files:
+        patch = pf.get("patch")
+        if not patch:
+            continue  # binary files, or files GitHub didn't generate a patch for
+        hunks = parse_patch(patch)
+        files.append(
+            DiffFile(
+                filename=pf["filename"],
+                annotated_diff=annotate_for_prompt(pf["filename"], hunks),
+                commentable_lines=commentable_lines(hunks),
+            )
+        )
+    return files

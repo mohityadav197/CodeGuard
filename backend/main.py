@@ -19,10 +19,9 @@ from backend.api.routes import router as api_router
 from backend.api.webhook import router as webhook_router
 from backend.auth.routes import router as auth_router
 from backend.config import settings
-from backend.core.diff_parser import annotate_for_prompt, commentable_lines, parse_patch
+from backend.core.diff_parser import build_diff_files
 from backend.core.github_client import GitHubClient
 from backend.core.graph import build_graph
-from backend.core.state import DiffFile
 from backend.database.db import init_db
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
@@ -49,23 +48,6 @@ async def startup():
     await init_db()
 
 
-def _build_diff_files(pr_files: list[dict]) -> list[DiffFile]:
-    files: list[DiffFile] = []
-    for pf in pr_files:
-        patch = pf.get("patch")
-        if not patch:
-            continue  # binary files, or files GitHub didn't generate a patch for
-        hunks = parse_patch(patch)
-        files.append(
-            DiffFile(
-                filename=pf["filename"],
-                annotated_diff=annotate_for_prompt(pf["filename"], hunks),
-                commentable_lines=commentable_lines(hunks),
-            )
-        )
-    return files
-
-
 def run_pipeline(owner: str, repo: str, pr_number: int, token: str, dry_run: bool) -> int:
     client = GitHubClient(token)
 
@@ -75,7 +57,7 @@ def run_pipeline(owner: str, repo: str, pr_number: int, token: str, dry_run: boo
         logger.exception("Failed to fetch PR #%s files from GitHub", pr_number)
         return 0  # non-blocking: don't fail the Action over a transient API error
 
-    files = _build_diff_files(pr_files)
+    files = build_diff_files(pr_files)
     if not files:
         logger.info("No reviewable file diffs found on PR #%s; nothing to do.", pr_number)
         return 0

@@ -50,6 +50,19 @@ def run(state: ReviewState) -> dict:
         for category, finding in top
     ]
 
+    # The same deduped/capped findings, shaped for DB persistence (used by
+    # the webhook handler to create Finding rows) rather than GitHub comments.
+    final_findings = [
+        {
+            "agent": category,
+            "file": finding.file,
+            "line": finding.line,
+            "severity": finding.severity,
+            "message": finding.message,
+        }
+        for category, finding in top
+    ]
+
     counts = {
         "bug": len(state.get("bug_findings", [])),
         "security": len(state.get("security_findings", [])),
@@ -65,4 +78,4 @@ def run(state: ReviewState) -> dict:
     if not top:
         summary_lines.append("- No issues found. \U0001F389")
 
-    return {"summary": "\n".join(summary_lines), "comments": comments}
+    return {"summary": "\n".join(summary_lines), "comments": comments, "final_findings": final_findings}
