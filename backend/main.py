@@ -9,6 +9,7 @@ import argparse
 import logging
 import os
 import sys
+from typing import Optional
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -85,7 +86,7 @@ def run_pipeline(owner: str, repo: str, pr_number: int, token: str, dry_run: boo
     return 0
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="CodeGuard multi-agent PR reviewer")
     parser.add_argument("--dry-run", action="store_true", help="Print findings instead of posting to GitHub")
     parser.add_argument("--owner", help="Repo owner (required for --dry-run)")

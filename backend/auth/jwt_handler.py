@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import uuid
 from datetime import datetime, timedelta, timezone
+from typing import Optional
 
 import jwt
 from fastapi import Depends, HTTPException, Request, status
@@ -21,7 +22,7 @@ def create_access_token(user_data: dict) -> str:
     return jwt.encode(payload, settings.JWT_SECRET, algorithm=ALGORITHM)
 
 
-def verify_token(token: str) -> dict | None:
+def verify_token(token: str) -> Optional[dict]:
     try:
         return jwt.decode(token, settings.JWT_SECRET, algorithms=[ALGORITHM])
     except jwt.PyJWTError:
