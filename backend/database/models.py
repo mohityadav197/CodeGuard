@@ -1,6 +1,6 @@
 """SQLAlchemy models for storing review history."""
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.dialects.postgresql import UUID
@@ -17,7 +17,7 @@ class Review(Base):
     pr_number = Column(Integer, nullable=False, index=True)
     status = Column(String, default="completed")
     total_findings = Column(Integer, default=0)
-    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
 
     findings = relationship("Finding", back_populates="review", cascade="all, delete-orphan")
 
@@ -33,7 +33,7 @@ class Finding(Base):
     severity = Column(String)  # critical, warning, info
     message = Column(Text)
     suggestion = Column(Text)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     review = relationship("Review", back_populates="findings")
 
@@ -46,5 +46,5 @@ class User(Base):
     github_avatar_url = Column(String, nullable=True)
     github_name = Column(String, nullable=True)
     github_token = Column(String, nullable=True)  # stores their OAuth token for repo access
-    created_at = Column(DateTime, default=datetime.utcnow)
-    last_login = Column(DateTime, nullable=True)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    last_login = Column(DateTime(timezone=True), nullable=True)
