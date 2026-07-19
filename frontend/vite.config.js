@@ -7,16 +7,8 @@ export default defineConfig({
     port: 5173,
     proxy: {
       "/api": "http://localhost:8000",
-    },
-  },
-  // index.js (not .jsx) contains JSX, so tell esbuild to parse .js as JSX.
-  esbuild: {
-    loader: "jsx",
-    include: /src\/.*\.jsx?$/,
-  },
-  optimizeDeps: {
-    esbuildOptions: {
-      loader: { ".js": "jsx" },
+      "/auth": "http://localhost:8000",
+      "/webhook": "http://localhost:8000",
     },
   },
 });

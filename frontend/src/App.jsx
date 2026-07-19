@@ -1,14 +1,50 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
+import CallbackPage from "./pages/CallbackPage";
+
+function ProtectedRoute({ children }) {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: "#0B0F1A" }}
+      >
+        <div
+          className="h-8 w-8 rounded-full border-2 animate-spin"
+          style={{ borderColor: "#1E2640", borderTopColor: "#0ED3CF" }}
+        />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/auth/callback" element={<CallbackPage />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
