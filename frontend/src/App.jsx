@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import CallbackPage from "./pages/CallbackPage";
+import SuccessPage from "./pages/SuccessPage";
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth();
@@ -43,6 +44,7 @@ export default function App() {
             }
           />
           <Route path="/auth/callback" element={<CallbackPage />} />
+          <Route path="/auth/success" element={<SuccessPage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

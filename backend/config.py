@@ -24,8 +24,8 @@ GITHUB_CLIENT_ID = os.environ.get("GITHUB_CLIENT_ID", "")
 GITHUB_CLIENT_SECRET = os.environ.get("GITHUB_CLIENT_SECRET", "")
 JWT_SECRET = os.environ.get("JWT_SECRET", "")
 
-FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:5173")
-SERVER_URL = os.environ.get("SERVER_URL", "http://localhost:8000")
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:5173").rstrip("/")
+SERVER_URL = os.environ.get("SERVER_URL", "http://localhost:8000").rstrip("/")
 
 # Model used for all three specialist agents. Groq's Llama 3.3 70B is a good
 # balance of quality and speed/cost for structured-output code review.

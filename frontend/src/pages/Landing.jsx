@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
+  AlertTriangle,
   ArrowRight,
   Bug,
   Check,
@@ -9,11 +11,17 @@ import {
   Shield,
   Sparkles,
   Star,
+  X,
   Zap,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import StatCard from "../components/StatCard";
+
+const ERROR_MESSAGES = {
+  auth_failed: "Login failed. Please try again.",
+  server_error: "Something went wrong. Please try again.",
+};
 
 const MONO = '"SF Mono", "Fira Code", monospace';
 
@@ -104,9 +112,47 @@ const STATS = [
   { icon: GitPullRequest, value: "0", label: "Setup required" },
 ];
 
+function ErrorBanner({ message, onDismiss }) {
+  return (
+    <div
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3 px-4 py-3 rounded-lg border shadow-lg"
+      style={{ backgroundColor: "#131825", borderColor: "#E8593C", color: "#E2E8F0" }}
+    >
+      <AlertTriangle size={18} style={{ color: "#E8593C" }} />
+      <span className="text-sm">{message}</span>
+      <button
+        onClick={onDismiss}
+        className="transition-colors duration-300 hover:text-[#E2E8F0]"
+        style={{ color: "#8892A8" }}
+        aria-label="Dismiss"
+      >
+        <X size={16} />
+      </button>
+    </div>
+  );
+}
+
 export default function Landing() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    if (error && ERROR_MESSAGES[error]) {
+      setErrorMessage(ERROR_MESSAGES[error]);
+    }
+  }, [searchParams]);
+
+  const dismissError = () => {
+    setErrorMessage(null);
+    const next = new URLSearchParams(searchParams);
+    next.delete("error");
+    setSearchParams(next, { replace: true });
+  };
+
   return (
     <div style={{ backgroundColor: "#0B0F1A", minHeight: "100vh" }}>
+      {errorMessage && <ErrorBanner message={errorMessage} onDismiss={dismissError} />}
       <Navbar />
       <Hero />
       <CodeDemo />

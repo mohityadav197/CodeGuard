@@ -3,13 +3,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
-// The real OAuth redirect_uri (backend -> GitHub -> here) never carries a
-// token -- the backend now redirects the token-bearing hop to /auth/success
-// instead (see vite.config.js / backend/auth/routes.py for why). This route
-// stays registered as a defensive fallback in case anything ever lands here
-// with a token directly, using the same success/failure handling as
-// SuccessPage.
-export default function CallbackPage() {
+/** Lands here after the backend finishes the GitHub OAuth exchange and
+ * redirects with a JWT in the query string. Kept at a distinct path from
+ * /auth/callback (the real OAuth redirect_uri) so the Vite dev proxy can't
+ * confuse the two -- see vite.config.js. */
+export default function SuccessPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -21,7 +19,7 @@ export default function CallbackPage() {
 
     const token = searchParams.get("token");
     if (!token) {
-      navigate("/", { replace: true });
+      navigate("/?error=auth_failed", { replace: true });
       return;
     }
 
