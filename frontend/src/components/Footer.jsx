@@ -9,7 +9,7 @@ export default function Footer() {
             Code<span style={{ color: "#0ED3CF" }}>Guard</span>
           </p>
           <p className="text-sm mt-1" style={{ color: "#8892A8" }}>
-            Built with LangGraph + Claude
+            Built with LangGraph + Groq
           </p>
         </div>
         <div className="flex items-center gap-6 text-sm">
