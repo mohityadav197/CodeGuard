@@ -1,3 +1,5 @@
+"""Alembic env config: loads DATABASE_URL and wires SQLAlchemy models for autogenerate."""
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config

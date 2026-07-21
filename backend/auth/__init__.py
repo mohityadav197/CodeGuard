@@ -1,1 +1,1 @@
-# CodeGuard
+# CodeGuard authentication package

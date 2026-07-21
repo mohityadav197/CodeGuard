@@ -1,3 +1,4 @@
+// Vite bundler config: React plugin, dev server proxy to backend
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 

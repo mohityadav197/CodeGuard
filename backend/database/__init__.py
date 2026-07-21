@@ -1,1 +1,1 @@
-# CodeGuard
+# CodeGuard database package

@@ -1,3 +1,4 @@
+// Tailwind CSS config: content paths for purging unused styles
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],

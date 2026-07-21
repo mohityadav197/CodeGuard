@@ -1,3 +1,4 @@
+# Python dependencies for the CodeGuard backend
 langgraph>=0.2.0
 langchain-groq>=0.2.0
 langchain-core>=0.3.0

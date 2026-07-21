@@ -1,3 +1,5 @@
+"""Tests for finding deduplication, capping, and summary logic."""
+
 from backend.core import aggregator
 from backend.core.state import Finding
 

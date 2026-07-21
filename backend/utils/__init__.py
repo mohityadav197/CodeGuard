@@ -1,1 +1,1 @@
-# CodeGuard
+# CodeGuard utilities package

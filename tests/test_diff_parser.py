@@ -1,3 +1,5 @@
+"""Tests for diff parsing and line-number mapping."""
+
 from pathlib import Path
 
 from backend.core.diff_parser import annotate_for_prompt, commentable_lines, parse_patch

@@ -1,1 +1,1 @@
-# CodeGuard
+# CodeGuard test suite package

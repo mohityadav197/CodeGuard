@@ -1,3 +1,4 @@
+# GitHub Actions workflow: triggers CodeGuard AI review on every pull request
 name: CodeGuard Review
 
 on:

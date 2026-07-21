@@ -1,6 +1,7 @@
 {
   "name": "codeguard-frontend",
   "version": "1.0.0",
+  "description": "npm package config: dependencies, scripts (dev/build/preview)",
   "type": "module",
   "scripts": {
     "dev": "vite",
