@@ -1,3 +1,4 @@
+// Shared site footer with branding and external links.
 import { Github } from "lucide-react";
 
 export default function Footer() {

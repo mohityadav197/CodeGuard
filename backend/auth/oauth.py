@@ -1,3 +1,5 @@
+"""Registers the GitHub OAuth client (Authlib) used for user login."""
+
 from authlib.integrations.starlette_client import OAuth
 
 from backend.config import settings

@@ -1,3 +1,6 @@
+"""Provides setup_logger(), a small factory for a consistently formatted
+stream logger used across the CodeGuard backend."""
+
 import logging, os
 
 

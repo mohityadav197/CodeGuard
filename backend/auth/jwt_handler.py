@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+"""Issues and verifies CodeGuard JWTs, and provides the get_current_user
+FastAPI dependency that authenticates requests from the Authorization header."""
+
 import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Optional

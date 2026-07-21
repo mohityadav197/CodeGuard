@@ -1,9 +1,5 @@
-"""Shared helpers for the three specialist review agents.
-
-Each specialist agent calls Groq once per changed file, asking for structured
-findings, then filters out anything that doesn't anchor to a real
-commentable line in that file's diff.
-"""
+"""Shared Groq call + response-filtering logic used by the bug, security,
+and quality agents to turn a diff into structured findings."""
 
 from __future__ import annotations
 

@@ -1,3 +1,4 @@
+// Colored pill badge for an agent name (bug/security/quality).
 const AGENT_STYLES = {
   bug: { bg: "rgba(242, 166, 35, 0.15)", color: "#F2A623", label: "Bug" },
   security: { bg: "rgba(232, 89, 60, 0.15)", color: "#E8593C", label: "Security" },

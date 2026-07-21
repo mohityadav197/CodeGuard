@@ -1,3 +1,4 @@
+// Reusable stat card with an optional count-up animation for numeric values.
 import { useEffect, useRef, useState } from "react";
 
 /** Reusable stat card. When `animate` is true and `value` is a number, the

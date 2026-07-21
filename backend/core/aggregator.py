@@ -1,6 +1,5 @@
-"""Merge findings from the three specialist agents into GitHub PR review
-comments: dedupe overlaps at the same file/line, cap total volume, and
-format a summary + inline comment bodies."""
+"""Dedupes and caps findings from the three specialist agents, then formats
+the result as GitHub inline review comments plus a summary."""
 
 from __future__ import annotations
 

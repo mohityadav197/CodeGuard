@@ -1,3 +1,5 @@
+// Dashboard page — shows review stats, charts, and recent PR review history
+// fetched from the CodeGuard backend API.
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AlertTriangle, BarChart3, Info, User as UserIcon } from "lucide-react";

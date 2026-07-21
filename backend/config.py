@@ -1,9 +1,5 @@
-"""Environment configuration for CodeGuard.
-
-In GitHub Actions, GITHUB_REPOSITORY, GITHUB_TOKEN are provided automatically
-by the runner; PR_NUMBER is passed explicitly by the workflow from the
-pull_request event payload.
-"""
+"""Loads and normalizes environment configuration (API keys, database URL,
+OAuth/JWT settings) shared by every part of the CodeGuard backend."""
 
 from __future__ import annotations
 

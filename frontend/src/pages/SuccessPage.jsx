@@ -1,3 +1,5 @@
+// Handles the post-OAuth redirect: stores the JWT, verifies it via
+// getMe(), and routes to the dashboard (or back to landing on failure).
 import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";

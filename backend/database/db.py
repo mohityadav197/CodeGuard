@@ -1,3 +1,6 @@
+"""Creates the async SQLAlchemy engine/session for Neon Postgres and exposes
+the get_db FastAPI dependency and init_db() startup hook."""
+
 from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine

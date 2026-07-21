@@ -1,10 +1,5 @@
-"""Parse GitHub PR file `patch` strings into line-numbered diff entries.
-
-GitHub's `GET /repos/{owner}/{repo}/pulls/{pr}/files` response includes a
-unified-diff `patch` string per file. We parse it into hunks so that each
-line can be annotated with its real line number in the file's new (right-side)
-version -- the only line numbers GitHub's review-comment API accepts.
-"""
+"""Parses GitHub PR file `patch` strings into line-numbered diff hunks that
+the review agents and GitHub's inline-comment API can both anchor to."""
 
 from __future__ import annotations
 

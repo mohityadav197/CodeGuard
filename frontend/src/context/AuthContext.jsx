@@ -1,3 +1,4 @@
+// React context providing auth state (user, isAuthenticated) plus login()/logout() actions.
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { getMe } from "../utils/api";
 

@@ -1,3 +1,4 @@
+// Top-level router: wraps the app in AuthProvider and defines all page routes.
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Landing from "./pages/Landing";

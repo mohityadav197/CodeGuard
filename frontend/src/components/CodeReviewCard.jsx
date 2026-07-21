@@ -1,3 +1,4 @@
+// Expandable review card that lazily fetches and displays a review's findings.
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import AgentBadge from "./AgentBadge";

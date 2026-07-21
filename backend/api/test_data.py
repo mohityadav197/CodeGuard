@@ -1,8 +1,5 @@
-"""Utility script to seed the database with fake review/finding data so the
-dashboard has something to show. Not run automatically -- invoke explicitly:
-
-    python -m backend.api.test_data seed
-"""
+"""CLI utility (`python -m backend.api.test_data seed`) that inserts fake
+reviews/findings so the dashboard has data to show during development."""
 
 from __future__ import annotations
 

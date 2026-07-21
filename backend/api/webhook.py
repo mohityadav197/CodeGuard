@@ -1,3 +1,6 @@
+"""GitHub webhook endpoint: verifies the signature, runs the review pipeline
+on PR events, and persists the resulting review/findings to the database."""
+
 import hashlib
 import hmac
 

@@ -1,3 +1,5 @@
+// Defensive fallback handler for /auth/callback in case it ever receives a
+// token directly; SuccessPage is the primary post-OAuth handler.
 import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";

@@ -1,6 +1,5 @@
-"""Wires the three specialist agents and the aggregator into a LangGraph
-StateGraph: fan out from START to bug/security/quality in parallel, then
-join at the aggregator."""
+"""Builds the LangGraph StateGraph that fans out to bug, security, and
+quality agents in parallel and joins their findings at the aggregator."""
 
 from __future__ import annotations
 

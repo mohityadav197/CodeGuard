@@ -1,7 +1,5 @@
-"""CLI entrypoint for CodeGuard: fetches a PR's diff, runs the multi-agent
-review pipeline, and posts results back to GitHub (or prints them locally
-with --dry-run).
-"""
+"""FastAPI app entry point (routers, middleware, DB startup) and CLI for
+running the CodeGuard review pipeline directly (--dry-run / Action mode)."""
 
 from __future__ import annotations
 

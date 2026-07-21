@@ -1,7 +1,5 @@
-"""Thin wrapper around the GitHub REST API endpoints CodeGuard needs:
-fetching a PR's changed files (with unified diff patches) and posting a
-single review with inline comments back onto the PR.
-"""
+"""Thin GitHub REST API client: fetches a PR's changed files (with patches)
+and posts a single review with inline comments back onto the PR."""
 
 from __future__ import annotations
 

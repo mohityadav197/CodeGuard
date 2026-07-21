@@ -1,3 +1,5 @@
+// Axios instance with an auth-token interceptor and wrapper functions for
+// every backend endpoint the frontend calls.
 import axios from "axios";
 
 const TOKEN_KEY = "codeguard_token";

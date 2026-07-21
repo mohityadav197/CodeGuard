@@ -1,3 +1,6 @@
+"""Authenticated dashboard API: lists reviews/findings and computes stats
+from PostgreSQL for the frontend to render."""
+
 import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Optional

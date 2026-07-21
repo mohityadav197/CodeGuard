@@ -1,3 +1,4 @@
+// Shared navbar for Landing and Dashboard; adapts its right side to auth state.
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LogOut, Menu, Shield, X } from "lucide-react";

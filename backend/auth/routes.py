@@ -1,3 +1,6 @@
+"""GitHub OAuth login/callback/me/logout endpoints: exchanges the OAuth
+code for a user profile, upserts the User, and issues a CodeGuard JWT."""
+
 from datetime import datetime, timezone
 
 from authlib.integrations.base_client.errors import MismatchingStateError

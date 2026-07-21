@@ -1,3 +1,4 @@
+// Landing page: hero, animated code-review demo, features, how-it-works, and CTA sections.
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
