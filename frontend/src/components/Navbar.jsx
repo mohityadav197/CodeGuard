@@ -89,7 +89,7 @@ export default function Navbar({ showLinks = true }) {
             </>
           ) : (
             <a
-              href="/auth/login"
+              href={`${import.meta.env.VITE_API_URL || ""}/auth/login`}
               className="px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 hover:opacity-90"
               style={{ backgroundColor: "#0ED3CF", color: "#0B0F1A" }}
             >
@@ -143,7 +143,7 @@ export default function Navbar({ showLinks = true }) {
             </button>
           ) : (
             <a
-              href="/auth/login"
+              href={`${import.meta.env.VITE_API_URL || ""}/auth/login`}
               className="px-4 py-2 rounded-lg font-medium text-sm text-center transition-all duration-300 hover:opacity-90"
               style={{ backgroundColor: "#0ED3CF", color: "#0B0F1A" }}
             >

@@ -4,11 +4,13 @@ import axios from "axios";
 
 const TOKEN_KEY = "codeguard_token";
 
-// baseURL is intentionally empty -- the Vite dev server proxies /api, /auth,
-// and /webhook to the backend (see vite.config.js), and in production this
-// is served from the same origin as the API.
+// In dev, the Vite proxy (see vite.config.js) forwards /api, /auth, and
+// /webhook to the backend, so an empty baseURL works. In production (e.g.
+// Vercel), the frontend and backend are on different origins, so
+// VITE_API_URL must point at the deployed backend.
+const BASE_URL = import.meta.env.VITE_API_URL || "";
 const api = axios.create({
-  baseURL: "",
+  baseURL: BASE_URL,
 });
 
 api.interceptors.request.use((config) => {

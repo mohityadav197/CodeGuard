@@ -192,7 +192,7 @@ function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <a
-            href="/auth/login"
+            href={`${import.meta.env.VITE_API_URL || ""}/auth/login`}
             className="flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:opacity-90 hover:scale-105"
             style={{ backgroundColor: "#0ED3CF", color: "#0B0F1A" }}
           >
@@ -460,7 +460,7 @@ function CtaSection() {
           under 30 seconds.
         </p>
         <a
-          href="/auth/login"
+          href={`${import.meta.env.VITE_API_URL || ""}/auth/login`}
           className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:opacity-90 hover:scale-105"
           style={{ backgroundColor: "#0ED3CF", color: "#0B0F1A" }}
         >
